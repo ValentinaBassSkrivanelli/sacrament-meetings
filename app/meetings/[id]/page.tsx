@@ -17,7 +17,7 @@ export default async function MeetingPage({
 
   if (!Number.isInteger(meetingId)) {
     notFound();
-  }
+  } 
 
   const meeting = getMeetingById(meetingId);
 
