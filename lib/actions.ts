@@ -1,5 +1,6 @@
 'use server';
-
+import { signIn, signOut } from "@/auth";
+import { AuthError } from "next-auth";
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { z } from 'zod';
@@ -141,4 +142,32 @@ export async function deleteMeeting(id: number) {
   }
 
   redirect('/meetings');
+}
+
+export async function authenticate(
+  prevState: string | undefined,
+  formData: FormData,
+) {
+  try {
+    await signIn("credentials", {
+      email: formData.get("email"),
+      password: formData.get("password"),
+      redirectTo: formData.get("callbackUrl")?.toString() || "/",
+    });
+  } catch (error) {
+    if (error instanceof AuthError) {
+      switch (error.type) {
+        case "CredentialsSignin":
+          return "Invalid email or password.";
+        default:
+          return "Something went wrong.";
+      }
+    }
+
+    throw error;
+  }
+}
+
+export async function logout() {
+  await signOut({ redirectTo: "/login" });
 }

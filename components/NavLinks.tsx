@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import AuthButton from './AuthButton';
 
 export default function NavLinks() {
   const pathname = usePathname();
@@ -11,7 +12,11 @@ export default function NavLinks() {
       <div className="flex gap-6">
         <Link
           href="/"
-          className={pathname === '/' ? 'font-bold text-indigo-700' : 'text-slate-600'}
+          className={
+            pathname === '/'
+              ? 'font-bold text-indigo-700'
+              : 'text-slate-600'
+          }
         >
           Home
         </Link>
@@ -37,6 +42,8 @@ export default function NavLinks() {
         >
           Current Meeting
         </Link>
+
+        <AuthButton />
       </div>
     </nav>
   );
