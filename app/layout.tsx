@@ -5,6 +5,15 @@ import './globals.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
+
+export const metadata: Metadata = {
+  title: {
+    default: 'Sacrament Meeting Planner',
+    template: '%s | Sacrament Meeting Planner',
+  },
+  description: 'Plan and manage sacrament meetings.',
+};
+
 const geistSans = Geist({
   variable: '--font-geist-sans',
   subsets: ['latin'],
@@ -14,11 +23,6 @@ const geistMono = Geist_Mono({
   variable: '--font-geist-mono',
   subsets: ['latin'],
 });
-
-export const metadata: Metadata = {
-  title: 'Sacrament Meeting Planner',
-  description: 'Plan and manage sacrament meetings.',
-};
 
 export default function RootLayout({
   children,
